@@ -1,48 +1,81 @@
 from fastapi import FastAPI
 from fastapi.responses import PlainTextResponse
-from pydantic import BaseModel
-from typing import Optional, Tuple
+from pydantic import BaseModel, Field
+from typing import Optional, Tuple, List, Dict, Any, Union
 
 app = FastAPI()
 
-
-class ProfileInfo(BaseModel):
-    short_bio: str
-    long_bio: str
-
-class User(BaseModel):
-    username: str
-    profile_info: ProfileInfo
-    liked_posts: Optional[list[int]] = None
 
 @app.get('/', response_class=PlainTextResponse)
 def home():
     return "Hello World, This is the home page"
 
 
-def get_user_info() -> User:
-    profile_info = {
+class User(BaseModel):
+    username: str = Field(
+        alias="name",
+        title="The Username",
+        description="This is the username of the user",
+        min_length=1,
+        default=None
+    )
+    liked_posts: List[int] = Field(
+        alias="liked_posts",
+    )
+
+
+class FullUserProfile(User):
+    short_bio: str
+    long_bio: str
+
+
+class CreateUserResponse(BaseModel):
+    user_id: int
+
+
+profile_infos = {
+    0: {
         "short_bio": "This is a short bio",
         "long_bio": "This is a long bio"
     }
-    profile_info = ProfileInfo(**profile_info)
-
-    user_content = {
-        "username": "testuser",
-        "liked_posts": [8],
-        "profile_info": profile_info
+}
+users_content = {
+    0: {
+        "liked_posts": [1] * 9,
     }
+}
+
+def create_user(full_profile_info: FullUserProfile) -> CreateUserResponse:
+    global profile_infos
+    global users_content
+
+    new_user_id = len(users_content)
+    users_content[new_user_id] = full_profile_info.dict()
+    profile_infos[new_user_id] = {
+        "short_bio": full_profile_info.short_bio,
+        "long_bio": full_profile_info.long_bio
+    }
+    return CreateUserResponse(user_id=new_user_id)
+
+def get_user_info(user_id: int = 0) -> FullUserProfile:
+    global profile_infos
+    global users_content
+
+    new_user_id = len(users_content)
+    liked_posts = full_user_profile.liked_posts
+    short_bio = full_profile.short_bio
+    long_bio = profile_infos.long_bio
 
 
-    return User(**user_content)
+@app.get('/user/{user_id}', response_model=FullUserProfile)
+def get_user_by_id(user_id: int):
+    full_user_profile = get_user_info(user_id)
+    return full_user_profile
 
 
-@app.get('/user/me', response_model=User)
-def test_endpoint():
-    
-    user = get_user_info()
-
-    return user
+@app.post('/users')
+def add_user(full_profile_info: FullUserProfile):
+    create_user(full_profile_info)
 
 
 
