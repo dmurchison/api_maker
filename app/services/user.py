@@ -1,4 +1,4 @@
-from typing import Optional, Union, Tuple, List, Dict, Any
+from typing import Optional, Union, List
 from app.exceptions.exceptions import UserNotFound
 from app.schemas.user import (
     CreateUserResponse,
@@ -21,13 +21,12 @@ users_content = {
 }
 
 
-class UserServices:
+class UserService:
     def __init__(self):
         pass
 
 
-    @staticmethod
-    async def get_all_users_with_pagination(self, start: int, limit: int):
+    async def get_all_users_with_pagination(self, start: int, limit: int) -> List:
         list_of_users = []
         keys = list(profile_infos.keys())
         total = len(keys)
@@ -80,14 +79,16 @@ class UserServices:
         return user_id
 
 
-@staticmethod
-async def delete_user(user_id: int) -> None:
-    global profile_infos
-    global users_content
+    @staticmethod
+    async def delete_user(user_id: int) -> None:
+        global profile_infos
+        global users_content
 
-    if user_id not in profile_infos:
-        raise UserNotFound(user_id=user_id)
+        if user_id not in profile_infos:
+            raise UserNotFound(user_id=user_id)
 
-    del profile_infos[user_id]
-    del users_content[user_id]
+        del profile_infos[user_id]
+        del users_content[user_id]
+
+
 
