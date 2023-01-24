@@ -5,4 +5,5 @@ class Config():
     DB_PORT = os.get_env('DB_PORT', 5432)
     DB_USER = os.get_env('DB_USER', 'postgres')
     DB_PASSWORD = os.get_env('DB_PASSWORD', 'postgres')
+    DB_NAME = os.get_env('DB_NAME', 'postgres')
 
