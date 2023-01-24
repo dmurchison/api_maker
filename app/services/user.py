@@ -1,7 +1,6 @@
-from typing import Optional, Union, List
+from typing import Any, Optional, Union, List
 from app.exceptions.exceptions import UserNotFound
 from app.schemas.user import (
-    CreateUserResponse,
     FullUserProfile,
     User
 )
@@ -26,7 +25,7 @@ class UserService:
         pass
 
 
-    async def get_all_users_with_pagination(self, start: int, limit: int) -> List:
+    async def get_all_users_with_pagination(self, start: int, limit: int) -> List[Any]:
         list_of_users = []
         keys = list(profile_infos.keys())
         total = len(keys)
