@@ -26,7 +26,7 @@ class UserServices:
 
 
     @staticmethod
-    async def get_all_users_with_pagination(self, start: int, limit: int) -> Tuple[List[FullUserProfile], int]:
+    async def get_all_users_with_pagination(self, start: int, limit: int):
         list_of_users = []
         keys = list(profile_infos.keys())
         total = len(keys)
@@ -58,7 +58,7 @@ class UserServices:
 
 
     @staticmethod
-    async def create_update_user(full_profile_info: FullUserProfile, user_id: Optional[int] = None) -> int:
+    async def create_update_user(full_profile_info: FullUserProfile, user_id: Optional[int] = None):
         global profile_infos
         global users_content
 
