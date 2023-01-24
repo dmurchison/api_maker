@@ -1,4 +1,5 @@
 from typing import Optional, Union, Tuple, List, Dict, Any
+from app.exceptions.exceptions import UserNotFound
 from app.schemas.user import (
     CreateUserResponse,
     FullUserProfile,
@@ -43,7 +44,9 @@ class UserServices:
 
 
     @staticmethod
-    async def get_user_info(user_id: int) -> FullUserProfile:
+    async def get_user_info(user_id: int = 0) -> FullUserProfile:
+        if user_id not in profile_infos:
+            raise UserNotFound(user_id=user_id)
         profile_info = profile_infos[user_id]
         user_content = users_content[user_id]
 
@@ -58,7 +61,7 @@ class UserServices:
 
 
     @staticmethod
-    async def create_update_user(full_profile_info: FullUserProfile, user_id: Optional[int] = None):
+    async def create_update_user(full_profile_info: FullUserProfile, user_id: Optional[int] = None) -> int:
         global profile_infos
         global users_content
 
@@ -77,25 +80,14 @@ class UserServices:
         return user_id
 
 
-    @staticmethod
-    async def delete_user(user_id: int):
-        global profile_infos
-        global users_content
+@staticmethod
+async def delete_user(user_id: int) -> None:
+    global profile_infos
+    global users_content
 
-        del profile_infos[user_id]
-        del users_content[user_id]
+    if user_id not in profile_infos:
+        raise UserNotFound(user_id=user_id)
 
-
-    @staticmethod
-    async def create_user(full_profile_info: FullUserProfile) -> CreateUserResponse:
-        global profile_infos
-        global users_content
-
-        new_user_id = len(users_content)
-        users_content[new_user_id] = full_profile_info.dict()
-        profile_infos[new_user_id] = {
-            "short_bio": full_profile_info.short_bio,
-            "long_bio": full_profile_info.long_bio
-        }
-        return CreateUserResponse(user_id=new_user_id)
+    del profile_infos[user_id]
+    del users_content[user_id]
 
