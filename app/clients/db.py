@@ -1,5 +1,7 @@
 from app.config import Config
 
+
+
 class DatabaseClient:
     def __init__(self, config: Config):
         self.config = config
