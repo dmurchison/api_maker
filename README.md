@@ -4,7 +4,6 @@
 
 
 ## The Set Up
-#
 
 ### Pipenv
   **`/Pipfile`**
@@ -133,7 +132,6 @@
 
 
 ## Other Dependencies
-#
 
 ### Development
   - fastapi
