@@ -19,12 +19,12 @@ ENV PYTHONUSERBASE ${PYROOT}
 ENV PATH=${PATH}:${PYROOT}/bin
 
 RUN addgroup -S myapp && adduser -S -G myapp user -u 1234
-COPY --chown=user:myapp --from=base ${PYROOT}/ ${PYROOT}/
+COPY --chown=myapp:user --from=base ${PYROOT}/ ${PYROOT}/
 
 RUN mkdir -p /usr/src/app/
 WORKDIR /usr/src
 
-COPY --chown=user:myapp app ./app
+COPY --chown=myapp:user app ./app
 
 USER 1234
 
