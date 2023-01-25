@@ -4,6 +4,7 @@ from app.exceptions.exceptions import UserNotFound
 import logging
 
 
+
 logger = logging.getLogger(__name__)
 print(__name__)
 
