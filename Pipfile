@@ -7,10 +7,13 @@ name = "pypi"
 fastapi = "*"
 uvicorn = "*"
 pydantic = "*"
+httpx = "*"
 
 [dev-packages]
 mypy = "*"
 pytest = "*"
+pytest-asyncio = "*"
+requests = "*"
 
 [requires]
 python_version = "3.9"

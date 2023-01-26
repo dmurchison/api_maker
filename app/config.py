@@ -1,8 +1,9 @@
-from pydantic import BaseSettings, PostgresDsn
 
 
 
-class Config(BaseSettings):
-    pass
-
+class Config:
+    DB_HOST = "my.database.com"
+    DB_USERNAME = "myusername"
+    DB_PASSWORD = "mypassword"
+\
 

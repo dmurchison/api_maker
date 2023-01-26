@@ -8,6 +8,9 @@ ENV PYROOT /pyroot
 ENV PYTHONUSERBASE ${PYROOT}
 ENV PATH=${PATH}:${PYROOT}/bin
 
+# This is to avoid creating .pyc files
+ENV PYTHONDONTWRITEBYTECODE 1
+
 # This is to install pipenv
 RUN PIP_USER=1 pip install pipenv
 COPY Pipfile* ./
