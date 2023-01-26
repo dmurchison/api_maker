@@ -1,4 +1,3 @@
-from typing import List
 from pydantic import BaseModel, Field
 
 
@@ -11,8 +10,8 @@ class User(BaseModel):
         min_length=1,
         default=None
     )
-    liked_posts: List[int] = Field(
-        alias="liked_posts",
+    liked_posts: list[int] = Field(
+        description="Array of liked post ids",
     )
 
 
@@ -22,11 +21,10 @@ class FullUserProfile(User):
 
 
 class MultipleUsersResponse(BaseModel):
-    users: List[User]
+    users: list[FullUserProfile]
     total: int
 
 
 class CreateUserResponse(BaseModel):
-    users: List[FullUserProfile]
-    total: int
+    user_id: int
 

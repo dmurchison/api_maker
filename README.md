@@ -140,4 +140,6 @@
 ### Testing
   - pytest
   - mypy
+  - pytest-asyncio
+
 
