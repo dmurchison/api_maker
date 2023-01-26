@@ -7,7 +7,8 @@ name = "pypi"
 fastapi = "*"
 uvicorn = "*"
 pydantic = "*"
-httpx = "*"
+requests = "*"
+aiohttp = "*"
 
 [dev-packages]
 mypy = "*"
@@ -15,6 +16,8 @@ pytest = "*"
 pytest-asyncio = "*"
 requests = "*"
 pytest-cov = "*"
+sqlalchemy = "*"
+psycopg2-binary = "*"
 
 [requires]
 python_version = "3.9"
