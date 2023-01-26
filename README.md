@@ -138,8 +138,10 @@
   - uvicorn
   - pydantic
 ### Testing
-  - pytest
   - mypy
+  - pytest
   - pytest-asyncio
+  - pytest-cov
+    - `pytest --cov=app tests/`
 
 

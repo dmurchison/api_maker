@@ -1,4 +1,4 @@
-from typing import Any, Optional, Union, List
+from typing import Any, Optional, Union, Tuple
 from app.exceptions.exceptions import UserNotFound
 from app.schemas.user import (
     FullUserProfile,
@@ -15,7 +15,7 @@ class UserService:
         self.users_content = users_content
 
 
-    async def get_all_users_with_pagination(self, start: int, limit: int) -> List[Any]:
+    async def get_all_users_with_pagination(self, start: int, limit: int) -> Tuple[list[FullUserProfile], int]:
         list_of_users = []
         keys = list(self.profile_infos.keys())
         total = len(keys)
