@@ -1,11 +1,12 @@
 import datetime
-from models.base import Base
 from sqlalchemy import Column, Integer, TIMESTAMP, UniqueConstraint, ForeignKeyConstraint, Index
+from models.base import Base
+
 
 
 
 class LikedPost(Base):
-    __table_name__ = "liked_post"
+    __tablename__ = "liked_post"
 
     __table_args__ = (UniqueConstraint("user_id", "post_id", name="user_post_unique"),
                      ForeignKeyConstraint(["user_id"], ["user_id"]))
