@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from app.routes.user import create_user_router
 from app.exceptions.exception_handler import add_exception_handlers
-
+from models import recreate_postgres_tables
 
 
 def create_app() -> FastAPI:
@@ -33,7 +33,6 @@ def create_profile_infos_and_create_users_content():
     return profile_infos, users_content
 
 
-from models import recreate_postgres_tables
 recreate_postgres_tables()
 
 app = create_app()

@@ -9,7 +9,7 @@ ENV PYTHONUSERBASE ${PYROOT}
 ENV PATH=${PATH}:${PYROOT}/bin
 
 # This is to avoid creating .pyc files
-ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONDONTWRITEBYTECODE=1
 
 # This is to install pipenv
 RUN PIP_USER=1 pip install pipenv
@@ -31,7 +31,7 @@ ENV PYTHONUSERBASE ${PYROOT}
 ENV PATH=${PATH}:${PYROOT}/bin
 
 # This is to avoid creating .pyc files
-ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONDONTWRITEBYTECODE=1
 
 # This is to avoid buffering stdout and stderr
 RUN addgroup -S myapp && adduser -S -G myapp user -u 1234

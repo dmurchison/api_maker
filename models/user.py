@@ -5,7 +5,7 @@ from sqlalchemy import Column, Integer, String, TIMESTAMP, UniqueConstraint
 
 
 class User(Base):
-    __table_name__ = "user"
+    __tablename__ = "user"
 
     __table_args__ = (UniqueConstraint("username", name="username_unique"), )
 
