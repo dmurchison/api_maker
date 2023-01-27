@@ -2,8 +2,8 @@ version: "3"
 
 services:
   app:
-    build:
-      context: .
+    build: 
+      context: ""
       args:
         - ENVIRONMENT=local
     ports:
@@ -13,7 +13,7 @@ services:
       - ./app:/usr/src/app
       - ./models:/usr/src/models
     environment:
-      - db_host=postgresql://postgres:postgres@postgresdb:5432/postgres
+      - db_host=postgresql://postgres:postgres@postgresdb:5432/testdb
 
     # The database needs to be run before the main.py file
     depends_on:
@@ -22,7 +22,7 @@ services:
 # Testing environment
   app-test:
     build:
-      context: .
+      context: ""
       args:
         - ENVIRONMENT=test
     volumes:
@@ -37,10 +37,10 @@ services:
     env_file:
       - .env-local
     volumes:
-      - pgdb:/var/lib/postgresql/data
+      - db_pg:/var/lib/postgresql/data
 
 
 volumes:
-  pgdb: 
+  db_pg: 
 
   
