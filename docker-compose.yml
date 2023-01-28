@@ -13,7 +13,7 @@ services:
       - ./app:/usr/src/app
       - ./models:/usr/src/models
     environment:
-      - db_host=postgresql://postgres:postgres@postgresdb:5432/testdb
+      - db_host=postgresql://postgres:postgres@postgresdb:5432/postgres
 
     # The database needs to be run before the main.py file
     depends_on:
@@ -31,14 +31,14 @@ services:
 
 # PostgreSQL
   postgresdb:
-    image: postgres:14.1-alpine
+    image: postgres:14.6
+    restart: always
     ports:
       - "5432:5432"
     env_file:
       - .env-local
     volumes:
       - db_pg:/var/lib/postgresql/data
-
 
 volumes:
   db_pg: 
