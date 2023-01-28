@@ -1,7 +1,5 @@
 FROM python:3.9-alpine AS base
 
-RUN mkdir -p ./docker-entrypoint.d ./docker-entrypoint-initdb.d
-
 # Environment var created in docker-compose.yml
 ARG ENVIRONMENT
 

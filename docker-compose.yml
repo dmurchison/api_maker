@@ -31,8 +31,7 @@ services:
 
 # PostgreSQL
   postgresdb:
-    image: postgres:14.6
-    restart: always
+    image: postgres:14.6-alpine
     ports:
       - "5432:5432"
     env_file:
